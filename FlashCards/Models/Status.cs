@@ -23,5 +23,10 @@
         // Чи було слово відоме раніше?
         public bool IsWordKnownBefore { get; set; }
 
+        public User User { get; set; }
+
+        public Card Card { get; set; }
+
+
     }
 }
