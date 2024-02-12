@@ -3,13 +3,13 @@ namespace FlashCards.Models
     public class Card
     {
 
-        // Ідентифікатор картки
+        // Р†Рґ
         public int Id { get; set; }
-        // Термін (оригінал слова)
+        // РћСЂРёРіС–РЅР°Р»СЊРЅРµ Р·РЅР°С‡РµРЅРЅСЏ
         public string Term { get; set; }
-        // Визначення (переклад)
+        // Р’РёР·РЅР°С‡РµРЅРЅСЏ Р°Р±Рѕ РїРµСЂРµРєР»Р°Рґ
         public string Definition { get; set; }
-        // Контекст (як використовується)
+        // РљРѕРЅС‚РµРєСЃС‚ РІРёРєРѕСЂРёСЃС‚Р°РЅРЅСЏ
         public string Context { get; set; }
 
     }
