@@ -1,6 +1,6 @@
 ﻿namespace FlashCards.Models
 {
-    public class User
+    public class Collection
     {
 
         // Ідентифікатор колекції
