@@ -3,7 +3,7 @@
     public class cardCollectionLink
     {
         // Ідентифікатор
-        public int cardCollectionLinkId { get; set; }
+        public int Id { get; set; }
         //ід картки
         public int CardId { get; set; }
         //ід назви
