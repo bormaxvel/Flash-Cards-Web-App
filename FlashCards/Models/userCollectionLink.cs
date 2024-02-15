@@ -12,5 +12,7 @@
         public Collection Collection { get; set; }
 
         public User User { get; set; }
+
+
     }
 }

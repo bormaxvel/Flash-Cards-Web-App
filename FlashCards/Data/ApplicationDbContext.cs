@@ -20,6 +20,42 @@ namespace FlashCards.Data
         {
         }
 
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<cardCollectionLink>()
+                .HasKey(cc => cc.Id);
+            modelBuilder.Entity<cardCollectionLink>()
+                .HasOne(cc => cc.Card)
+                .WithMany(c => c.cardCollectionLink)
+                .HasForeignKey(cc => cc.Id);
+            modelBuilder.Entity<cardCollectionLink>()
+                .HasOne(cc => cc.Collection)
+                .WithMany(c => c.cardCollectionLink)
+                .HasForeignKey(cc => cc.Id);
+
+            modelBuilder.Entity<userCollectionLink>()
+                .HasKey(uc => uc.Id);
+            modelBuilder.Entity<userCollectionLink>()
+                .HasOne(uc => uc.User)
+                .WithMany(u => u.userCollectionLink)
+                .HasForeignKey(uc => uc.Id);
+            modelBuilder.Entity<userCollectionLink>()
+                .HasOne(uc => uc.Collection)
+                .WithMany(c => c.userCollectionLink)
+                .HasForeignKey(uc => uc.Id);
+
+            modelBuilder.Entity<Status>()
+                .HasKey(s => s.Id);
+            modelBuilder.Entity<Status>()
+                .HasOne(s => s.User)
+                .WithMany(u => u.Status)
+                .HasForeignKey(s => s.Id);
+            modelBuilder.Entity<Status>()
+                .HasOne(s => s.Card)
+                .WithMany(c => c.Statuses)
+                .HasForeignKey(s => s.CardId);
+        }
+
     }
+
 }
