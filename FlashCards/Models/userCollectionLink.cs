@@ -3,7 +3,7 @@
     public class userCollectionLink
     {
         //ід
-        public int userCollectionLinkId { get; set; }
+        public int Id { get; set; }
         //ід користувача
         public int UserId { get; set; }
         //ід колекції
