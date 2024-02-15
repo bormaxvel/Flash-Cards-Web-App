@@ -4,7 +4,7 @@
     {
 
         // Ідентифікатор користувача
-        public int userId{ get; set; }
+        public int Id{ get; set; }
 
         // Нікнейм користувача
         public string nickName { get; set; }
