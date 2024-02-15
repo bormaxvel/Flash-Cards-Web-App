@@ -3,7 +3,7 @@
     public class Status
     {
         // Ідентифікатор
-        public int StatusId { get; set; }
+        public int Id { get; set; }
 
         // Ідентифікатор користувача
         public int UserId { get; set; }
