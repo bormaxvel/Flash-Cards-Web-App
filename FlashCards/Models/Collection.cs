@@ -4,13 +4,13 @@
     {
 
         // Ідентифікатор колекції
-        public int id { get; set; }
+        public int Id { get; set; }
 
         // Назва колекції
-        public string name { get; set; }
+        public string Name { get; set; }
 
         // Опис колекції
-        public string description { get; set; }
+        public string Description { get; set; }
 
     }
 }
