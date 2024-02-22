@@ -26,29 +26,29 @@ namespace FlashCards.Data
                 .HasKey(cc => cc.Id);
             modelBuilder.Entity<cardCollectionLink>()
                 .HasOne(cc => cc.Card)
-                .WithMany(c => c.cardCollectionLink)
+                .WithMany(c => c.CardCollectionLinks)
                 .HasForeignKey(cc => cc.Id);
             modelBuilder.Entity<cardCollectionLink>()
                 .HasOne(cc => cc.Collection)
-                .WithMany(c => c.cardCollectionLink)
+                .WithMany(c => c.CardCollectionLinks)
                 .HasForeignKey(cc => cc.Id);
 
             modelBuilder.Entity<userCollectionLink>()
                 .HasKey(uc => uc.Id);
             modelBuilder.Entity<userCollectionLink>()
                 .HasOne(uc => uc.User)
-                .WithMany(u => u.userCollectionLink)
+                .WithMany(u => u.UserCollectionLinks)
                 .HasForeignKey(uc => uc.Id);
             modelBuilder.Entity<userCollectionLink>()
                 .HasOne(uc => uc.Collection)
-                .WithMany(c => c.userCollectionLink)
+                .WithMany(c => c.UserCollectionLinks)
                 .HasForeignKey(uc => uc.Id);
 
             modelBuilder.Entity<Status>()
                 .HasKey(s => s.Id);
             modelBuilder.Entity<Status>()
                 .HasOne(s => s.User)
-                .WithMany(u => u.Status)
+                .WithMany(u => u.Statuses)
                 .HasForeignKey(s => s.Id);
             modelBuilder.Entity<Status>()
                 .HasOne(s => s.Card)
