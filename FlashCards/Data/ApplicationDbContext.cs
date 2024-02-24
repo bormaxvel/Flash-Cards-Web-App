@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FlashCards.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FlashCards.Data
 {
@@ -22,6 +23,10 @@ namespace FlashCards.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .HasKey(iul => new { iul.LoginProvider, iul.ProviderKey });
+
             modelBuilder.Entity<cardCollectionLink>()
                 .HasKey(cc => cc.Id);
             modelBuilder.Entity<cardCollectionLink>()
@@ -44,8 +49,8 @@ namespace FlashCards.Data
                 .WithMany(c => c.UserCollectionLinks)
                 .HasForeignKey(uc => uc.Id);
 
-            modelBuilder.Entity<Status>()
-                .HasKey(s => s.Id);
+            //modelBuilder.Entity<Status>()
+                //.HasKey(s => s.Id);
             modelBuilder.Entity<Status>()
                 .HasOne(s => s.User)
                 .WithMany(u => u.Statuses)
@@ -54,6 +59,7 @@ namespace FlashCards.Data
                 .HasOne(s => s.Card)
                 .WithMany(c => c.Statuses)
                 .HasForeignKey(s => s.CardId);
+            base.OnModelCreating(modelBuilder);
         }
 
     }

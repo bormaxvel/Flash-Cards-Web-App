@@ -12,8 +12,8 @@ namespace FlashCards.Models
         // Контекст використання
         public string Context { get; set; }
 
-        public ICollection<cardCollectionLink> CardCollectionLinks { get; set; }
-        public ICollection<Status> Statuses { get; set; }
+        public ICollection<cardCollectionLink>? CardCollectionLinks { get; set; }
+        public ICollection<Status>? Statuses { get; set; }
 
     }
 }

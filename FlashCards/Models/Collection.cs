@@ -12,8 +12,8 @@
         // Опис колекції
         public string Description { get; set; }
 
-        public ICollection<cardCollectionLink> CardCollectionLinks { get; set; }
-        public ICollection<userCollectionLink> UserCollectionLinks { get; set; }
+        public ICollection<cardCollectionLink>? CardCollectionLinks { get; set; }
+        public ICollection<userCollectionLink>? UserCollectionLinks { get; set; }
 
 
     }
