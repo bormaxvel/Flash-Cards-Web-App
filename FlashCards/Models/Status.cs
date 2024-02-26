@@ -1,4 +1,4 @@
-﻿namespace FlashCards.Models
+namespace FlashCards.Models
 {
     public class Status
     {
@@ -23,9 +23,9 @@
         // Чи було слово відоме раніше?
         public bool IsWordKnownBefore { get; set; }
 
-        public User User { get; set; }
+        public User? User { get; set; }
 
-        public Card Card { get; set; }
+        public Card? Card { get; set; }
 
 
     }
