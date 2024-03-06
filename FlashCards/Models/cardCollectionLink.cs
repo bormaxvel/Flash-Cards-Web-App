@@ -9,9 +9,9 @@
         //ід назви
         public int CollectionID { get; set; }
 
-        public Card Card { get; set; }
+        public Card? Card { get; set; }
 
-        public Collection Collection { get; set; }
+        public Collection? Collection { get; set; }
 
     }
 }

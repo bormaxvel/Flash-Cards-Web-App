@@ -9,9 +9,9 @@
         //ід колекції
         public int CollectionID { get; set; }
 
-        public Collection Collection { get; set; }
+        public Collection? Collection { get; set; }
 
-        public User User { get; set; }
+        public User? User { get; set; }
 
 
     }
