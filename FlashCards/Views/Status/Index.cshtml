@@ -12,8 +12,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.UserId)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Card)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Mentions)
@@ -30,18 +33,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Card)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.Card.Term)
             </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Mentions)
             </td>
@@ -55,11 +60,9 @@
                 @Html.DisplayFor(modelItem => item.IsWordKnownBefore)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                    @Html.DisplayFor(modelItem => item.User.nickName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Card.Id)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

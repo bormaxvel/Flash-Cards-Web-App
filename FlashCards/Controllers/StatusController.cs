@@ -22,8 +22,12 @@ namespace FlashCards.Controllers
         // GET: Status
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Statuses.Include(s => s.Card).Include(s => s.User);
-            return View(await applicationDbContext.ToListAsync());
+            var statuses = await _context.Statuses
+                .Include(s => s.Card)
+                .Include(s => s.User)
+                .ToListAsync();
+
+            return View(statuses);
         }
 
         // GET: Status/Details/5
