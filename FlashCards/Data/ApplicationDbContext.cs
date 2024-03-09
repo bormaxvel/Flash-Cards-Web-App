@@ -9,7 +9,7 @@ namespace FlashCards.Data
     {
 
         public DbSet<Card> Cards { get; set; }
-        public DbSet<cardCollectionLink> CardCollectionLinks{ get; set; }
+        public DbSet<cardCollectionLink> CardCollectionLinks { get; set; }
         public DbSet<Collection> Collections { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<User> Users { get; set; }
@@ -28,15 +28,15 @@ namespace FlashCards.Data
                 .HasKey(iul => new { iul.LoginProvider, iul.ProviderKey });
 
             modelBuilder.Entity<cardCollectionLink>()
-                .HasKey(cc => cc.Id);
+                .HasKey(cc => new { cc.CardId, cc.CollectionID });
             modelBuilder.Entity<cardCollectionLink>()
                 .HasOne(cc => cc.Card)
                 .WithMany(c => c.CardCollectionLinks)
-                .HasForeignKey(cc => cc.Id);
+                .HasForeignKey(cc => cc.CardId);
             modelBuilder.Entity<cardCollectionLink>()
                 .HasOne(cc => cc.Collection)
                 .WithMany(c => c.CardCollectionLinks)
-                .HasForeignKey(cc => cc.Id);
+                .HasForeignKey(cc => cc.CollectionID);
 
             modelBuilder.Entity<userCollectionLink>()
                 .HasKey(uc => uc.Id);
@@ -49,8 +49,6 @@ namespace FlashCards.Data
                 .WithMany(c => c.UserCollectionLinks)
                 .HasForeignKey(uc => uc.Id);
 
-            //modelBuilder.Entity<Status>()
-                //.HasKey(s => s.Id);
             modelBuilder.Entity<Status>()
                 .HasOne(s => s.User)
                 .WithMany(u => u.Statuses)

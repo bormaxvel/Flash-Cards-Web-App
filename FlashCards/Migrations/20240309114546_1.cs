@@ -202,22 +202,22 @@ namespace FlashCards.Migrations
                 name: "CardCollectionLinks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
                     CardId = table.Column<int>(type: "int", nullable: false),
-                    CollectionID = table.Column<int>(type: "int", nullable: false)
+                    CollectionID = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CardCollectionLinks", x => x.Id);
+                    table.PrimaryKey("PK_CardCollectionLinks", x => new { x.CardId, x.CollectionID });
                     table.ForeignKey(
-                        name: "FK_CardCollectionLinks_Cards_Id",
-                        column: x => x.Id,
+                        name: "FK_CardCollectionLinks_Cards_CardId",
+                        column: x => x.CardId,
                         principalTable: "Cards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CardCollectionLinks_Collections_Id",
-                        column: x => x.Id,
+                        name: "FK_CardCollectionLinks_Collections_CollectionID",
+                        column: x => x.CollectionID,
                         principalTable: "Collections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -315,6 +315,11 @@ namespace FlashCards.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CardCollectionLinks_CollectionID",
+                table: "CardCollectionLinks",
+                column: "CollectionID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Statuses_CardId",

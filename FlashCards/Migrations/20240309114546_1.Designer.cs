@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlashCards.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240306131925_1")]
+    [Migration("20240309114546_1")]
     partial class _1
     {
         /// <inheritdoc />
@@ -120,16 +120,18 @@ namespace FlashCards.Migrations
 
             modelBuilder.Entity("FlashCards.Models.cardCollectionLink", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("CardId")
                         .HasColumnType("int");
 
                     b.Property<int>("CollectionID")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("CardId", "CollectionID");
+
+                    b.HasIndex("CollectionID");
 
                     b.ToTable("CardCollectionLinks");
                 });
@@ -375,13 +377,13 @@ namespace FlashCards.Migrations
                 {
                     b.HasOne("FlashCards.Models.Card", "Card")
                         .WithMany("CardCollectionLinks")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FlashCards.Models.Collection", "Collection")
                         .WithMany("CardCollectionLinks")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CollectionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

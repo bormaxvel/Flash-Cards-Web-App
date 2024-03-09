@@ -43,27 +43,81 @@ namespace FlashCards.Controllers
             return View(card);
         }
 
+        // POST: Cards/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Term,Definition,Context")] Card card)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(card);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(card);
+        //}
+
         // GET: Cards/Create
         public IActionResult Create()
         {
+            // Fetch the available collection names from the database
+            var collectionNames = _context.Collections.Select(c => c.Name).ToList();
+
+            // Pass the collection names to the view as a SelectList
+            ViewData["CollectionNames"] = new SelectList(collectionNames);
+
             return View();
         }
 
         // POST: Cards/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Term,Definition,Context")] Card card)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(card);
-                await _context.SaveChangesAsync();
+                // Check if the card exists in the database
+                var existingCard = await _context.Cards.FirstOrDefaultAsync(c => c.Id == card.Id);
+
+                if (existingCard == null)
+                {
+                    // Add the card to the Card table if it doesn't exist
+                    _context.Add(card);
+                    await _context.SaveChangesAsync(); // Save changes to get the newly generated card Id
+                }
+                else
+                {
+                    // Update the existing card with the new data
+                    _context.Entry(existingCard).CurrentValues.SetValues(card);
+                    await _context.SaveChangesAsync(); // Save changes to update the existing card
+                }
+
+                // Retrieve the corresponding collection based on the context (Name)
+                var collection = await _context.Collections.FirstOrDefaultAsync(c => c.Name == card.Context);
+
+                if (collection != null)
+                {
+                    // Create a new cardCollectionLink entry
+                    var cardCollectionLink = new cardCollectionLink
+                    {
+                        CardId = card.Id,
+                        CollectionID = collection.Id
+                    };
+
+                    // Add the cardCollectionLink to the table
+                    _context.CardCollectionLinks.Add(cardCollectionLink);
+                    await _context.SaveChangesAsync(); // Save changes to add the new link
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(card);
         }
+
+
+
 
         // GET: Cards/Edit/5
         public async Task<IActionResult> Edit(int? id)
