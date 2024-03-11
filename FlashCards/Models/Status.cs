@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace FlashCards.Models
 {
     public class Status
@@ -6,7 +8,7 @@ namespace FlashCards.Models
         public int Id { get; set; }
 
         // Ідентифікатор користувача
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         // Ідентифікатор слова
         public int CardId { get; set; }
@@ -23,6 +25,7 @@ namespace FlashCards.Models
         // Чи було слово відоме раніше?
         public bool IsWordKnownBefore { get; set; }
 
+        [ForeignKey("UserId")]
         public User? User { get; set; }
 
         public Card? Card { get; set; }

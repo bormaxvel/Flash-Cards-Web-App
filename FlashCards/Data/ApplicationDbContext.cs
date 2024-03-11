@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FlashCards.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
 
         public DbSet<Card> Cards { get; set; }
@@ -43,7 +43,7 @@ namespace FlashCards.Data
             modelBuilder.Entity<userCollectionLink>()
                 .HasOne(uc => uc.User)
                 .WithMany(u => u.UserCollectionLinks)
-                .HasForeignKey(uc => uc.Id);
+                .HasForeignKey(uc => uc.UserId);
             modelBuilder.Entity<userCollectionLink>()
                 .HasOne(uc => uc.Collection)
                 .WithMany(c => c.UserCollectionLinks)
@@ -52,7 +52,7 @@ namespace FlashCards.Data
             modelBuilder.Entity<Status>()
                 .HasOne(s => s.User)
                 .WithMany(u => u.Statuses)
-                .HasForeignKey(s => s.Id);
+                .HasForeignKey(s => s.UserId);
             modelBuilder.Entity<Status>()
                 .HasOne(s => s.Card)
                 .WithMany(c => c.Statuses)
