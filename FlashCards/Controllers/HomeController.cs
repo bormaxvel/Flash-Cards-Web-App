@@ -1,6 +1,8 @@
+using FlashCards.Data;
 using FlashCards.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace FlashCards.Controllers
@@ -16,9 +18,10 @@ namespace FlashCards.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Collections.ToListAsync());
         }
 
         public IActionResult Privacy()
