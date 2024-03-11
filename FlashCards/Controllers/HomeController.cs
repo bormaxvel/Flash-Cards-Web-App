@@ -20,7 +20,7 @@ namespace FlashCards.Controllers
             _context = context;
         }
 
-
+        //З'єднання двох таблиць для подальшої вибірки кількості слів в кожній категорії
         public async Task<IActionResult> Index()
         {
             var collections = await _context.Collections
