@@ -17,6 +17,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
+                <th>
+                    Count
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -30,10 +33,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
-                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CardCollectionLinks.Count)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-controller="Collections" asp-route-id="@item.Id">Details</a>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-
 </div>

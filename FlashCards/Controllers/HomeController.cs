@@ -23,7 +23,10 @@ namespace FlashCards.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Collections.ToListAsync());
+            var collections = await _context.Collections
+                .Include(c => c.CardCollectionLinks)
+                .ToListAsync();
+            return View(collections);
         }
 
         public IActionResult Privacy()
