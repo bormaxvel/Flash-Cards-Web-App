@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Collections</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -18,24 +18,70 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th>
+                Access
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @{
+            // Получаем доступ к словарю через явное приведение типа
+            var collectionAccess = ViewData["CollectionAccess"] as Dictionary<int, bool>;
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @{
+                        // Проверяем, есть ли доступ к коллекции, используя приведенный словарь
+                        bool hasAccess = false;
+                        if (collectionAccess != null && collectionAccess.ContainsKey(item.Id))
+                        {
+                            hasAccess = collectionAccess[item.Id];
+                        }
+                    }
+                    <input type="checkbox" id="checkbox_@item.Id" data-collection-id="@item.Id" @(hasAccess ? "checked" : "") />
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('input[type="checkbox"]').change(function () {
+                var collectionId = $(this).data('collection-id');
+                var isChecked = $(this).is(':checked');
+
+                $.ajax({
+                    url: '/Collections/ToggleAccess',
+                    type: 'POST',
+                    data: {
+                        collectionId: collectionId,
+                        isChecked: isChecked
+                    },
+                    success: function (data) {
+                        console.log('Access toggled successfully.');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error toggling access: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+}

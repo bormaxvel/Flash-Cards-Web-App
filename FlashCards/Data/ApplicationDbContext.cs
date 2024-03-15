@@ -47,7 +47,7 @@ namespace FlashCards.Data
             modelBuilder.Entity<userCollectionLink>()
                 .HasOne(uc => uc.Collection)
                 .WithMany(c => c.UserCollectionLinks)
-                .HasForeignKey(uc => uc.Id);
+                .HasForeignKey(uc => uc.CollectionID);
 
             modelBuilder.Entity<Status>()
                 .HasOne(s => s.User)

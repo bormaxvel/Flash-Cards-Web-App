@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlashCards.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240315143902_1243531366892")]
-    partial class _1243531366892
+    [Migration("20240315160621_1243531366894")]
+    partial class _1243531366894
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -196,7 +196,10 @@ namespace FlashCards.Migrations
             modelBuilder.Entity("FlashCards.Models.userCollectionLink", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CollectionID")
                         .HasColumnType("int");
@@ -206,6 +209,8 @@ namespace FlashCards.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CollectionID");
 
                     b.HasIndex("UserId");
 
@@ -387,7 +392,7 @@ namespace FlashCards.Migrations
                 {
                     b.HasOne("FlashCards.Models.Collection", "Collection")
                         .WithMany("UserCollectionLinks")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CollectionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

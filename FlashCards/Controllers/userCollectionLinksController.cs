@@ -7,23 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FlashCards.Data;
 using FlashCards.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FlashCards.Controllers
 {
     public class userCollectionLinksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public userCollectionLinksController(ApplicationDbContext context)
+        public userCollectionLinksController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: userCollectionLinks
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.UserCollectionLinks.Include(u => u.Collection).Include(u => u.User);
-            return View(await applicationDbContext.ToListAsync());
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            // Фильтруем записи по текущему идентификатору пользователя
+            var userCollectionLinks = _context.UserCollectionLinks
+                .Include(u => u.Collection)
+                .Include(u => u.User)
+                .Where(u => u.UserId == currentUser.Id);
+
+            return View(await userCollectionLinks.ToListAsync());
         }
 
         // GET: userCollectionLinks/Details/5
@@ -49,8 +59,8 @@ namespace FlashCards.Controllers
         // GET: userCollectionLinks/Create
         public IActionResult Create()
         {
-            ViewData["Id"] = new SelectList(_context.Collections, "Id", "Id");
-            ViewData["Id"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
+            ViewData["CollectionID"] = new SelectList(_context.Collections, "Id", "Name");
             return View();
         }
 
@@ -67,8 +77,8 @@ namespace FlashCards.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Id"] = new SelectList(_context.Collections, "Id", "Id", userCollectionLink.Id);
-            ViewData["Id"] = new SelectList(_context.Users, "Id", "Id", userCollectionLink.Id);
+     //       ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName", userCollectionLink.UserId);
+       //     ViewData["CollectionID"] = new SelectList(_context.Collections, "Id", "Name", userCollectionLink.CollectionID);
             return View(userCollectionLink);
         }
 

@@ -193,7 +193,10 @@ namespace FlashCards.Migrations
             modelBuilder.Entity("FlashCards.Models.userCollectionLink", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CollectionID")
                         .HasColumnType("int");
@@ -203,6 +206,8 @@ namespace FlashCards.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CollectionID");
 
                     b.HasIndex("UserId");
 
@@ -384,7 +389,7 @@ namespace FlashCards.Migrations
                 {
                     b.HasOne("FlashCards.Models.Collection", "Collection")
                         .WithMany("UserCollectionLinks")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CollectionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

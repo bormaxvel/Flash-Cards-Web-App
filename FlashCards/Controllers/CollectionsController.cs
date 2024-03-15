@@ -7,22 +7,69 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FlashCards.Data;
 using FlashCards.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FlashCards.Controllers
 {
     public class CollectionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public CollectionsController(ApplicationDbContext context)
+        public CollectionsController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleAccess(int collectionId, bool isChecked)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            var link = await _context.UserCollectionLinks.FirstOrDefaultAsync(ucl => ucl.CollectionID == collectionId && ucl.UserId == currentUser.Id);
+
+            if (isChecked && link == null)
+            {
+                // Добавляем запись в таблицу userCollectionLink
+                var newLink = new userCollectionLink
+                {
+                    UserId = currentUser.Id,
+                    CollectionID = collectionId
+                };
+                _context.UserCollectionLinks.Add(newLink);
+            }
+            else if (!isChecked && link != null)
+            {
+                // Удаляем запись из таблицы userCollectionLink
+                _context.UserCollectionLinks.Remove(link);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         // GET: Collections
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Collections.ToListAsync());
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            // Получаем все коллекции из базы данных
+            var collections = await _context.Collections.ToListAsync();
+
+            // Создаем словарь, где ключ - это ID коллекции, а значение - указывает, имеет ли пользователь доступ к этой коллекции
+            var collectionAccess = new Dictionary<int, bool>();
+            foreach (var collection in collections)
+            {
+                // Проверяем наличие записи в таблице userCollectionLink для текущего пользователя и коллекции
+                var link = await _context.UserCollectionLinks.FirstOrDefaultAsync(ucl => ucl.CollectionID == collection.Id && ucl.UserId == currentUser.Id);
+                collectionAccess.Add(collection.Id, link != null);
+            }
+
+            // Передаем коллекции и информацию о доступе к представлению
+            ViewData["CollectionAccess"] = collectionAccess;
+            return View(collections);
         }
 
         // GET: Collections/Details/5

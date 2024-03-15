@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FlashCards.Migrations
 {
     /// <inheritdoc />
-    public partial class _1243531366892 : Migration
+    public partial class _1243531366894 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -245,7 +245,8 @@ namespace FlashCards.Migrations
                 name: "UserCollectionLinks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CollectionID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -259,8 +260,8 @@ namespace FlashCards.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserCollectionLinks_Collections_Id",
-                        column: x => x.Id,
+                        name: "FK_UserCollectionLinks_Collections_CollectionID",
+                        column: x => x.CollectionID,
                         principalTable: "Collections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -319,6 +320,11 @@ namespace FlashCards.Migrations
                 name: "IX_Statuses_UserId",
                 table: "Statuses",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCollectionLinks_CollectionID",
+                table: "UserCollectionLinks",
+                column: "CollectionID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserCollectionLinks_UserId",
