@@ -54,7 +54,7 @@ namespace FlashCards.Controllers
         public IActionResult Create()
         {
             ViewData["CardId"] = new SelectList(_context.Cards, "Id", "Id");
-            ViewData["Id"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 

@@ -50,6 +50,8 @@ namespace FlashCards.Data
                 .HasForeignKey(uc => uc.CollectionID);
 
             modelBuilder.Entity<Status>()
+                .HasKey(s => s.Id);
+            modelBuilder.Entity<Status>()
                 .HasOne(s => s.User)
                 .WithMany(u => u.Statuses)
                 .HasForeignKey(s => s.UserId);

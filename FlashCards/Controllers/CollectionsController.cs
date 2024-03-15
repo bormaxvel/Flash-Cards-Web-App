@@ -38,15 +38,50 @@ namespace FlashCards.Controllers
                     CollectionID = collectionId
                 };
                 _context.UserCollectionLinks.Add(newLink);
+                var wordsInCollection = await _context.CardCollectionLinks
+           .Where(ccl => ccl.CollectionID == collectionId)
+           .Select(ccl => ccl.Card)
+           .ToListAsync();
+
+                // Додаємо записи в таблицю Status для кожного слова
+                foreach (var word in wordsInCollection)
+                {
+                    var status = new Status
+                    {
+                        UserId = currentUser.Id,
+                        CardId = word.Id,
+                        Mentions = 0,
+                        IsWordTakenForLearning = true,
+                        IsWordLearned = false,
+                        IsWordKnownBefore = false
+                        // Інші значення статусу можна задати за замовчуванням або відповідно до вашої логіки
+                    };
+                    _context.Statuses.Add(status);
+                }
             }
             else if (!isChecked && link != null)
             {
-                // Удаляем запись из таблицы userCollectionLink
+                var wordsInCollectionIds = await _context.CardCollectionLinks
+                .Where(ccl => ccl.CollectionID == collectionId)
+                .Select(ccl => ccl.CardId)
+                .ToListAsync();
+
+                // Отримуємо всі записи з таблиці Status, які пов'язані з користувачем та словами з колекції
+                var statusesToRemove = await _context.Statuses
+                    .Where(s => s.UserId == currentUser.Id && wordsInCollectionIds.Contains(s.CardId))
+                    .ToListAsync();
+
+                // Видаляємо ці записи з таблиці Status
+                _context.Statuses.RemoveRange(statusesToRemove);
+
+
                 _context.UserCollectionLinks.Remove(link);
             }
+            
+
+           
 
             await _context.SaveChangesAsync();
-
             return Ok();
         }
 
