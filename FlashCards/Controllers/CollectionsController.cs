@@ -116,7 +116,10 @@ namespace FlashCards.Controllers
             }
 
             var collection = await _context.Collections
+                .Include(c => c.CardCollectionLinks)
+                .ThenInclude(cc => cc.Card)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (collection == null)
             {
                 return NotFound();

@@ -44,23 +44,7 @@ namespace FlashCards.Controllers
         }
 
         // POST: Cards/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Term,Definition,Context")] Card card)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(card);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(card);
-        //}
-
-        // GET: Cards/Create
-        public IActionResult Create()
+        public IActionResult Create(string context)
         {
             // Fetch the available collection names from the database
             var collectionNames = _context.Collections.Select(c => c.Name).ToList();
@@ -68,8 +52,12 @@ namespace FlashCards.Controllers
             // Pass the collection names to the view as a SelectList
             ViewData["CollectionNames"] = new SelectList(collectionNames);
 
+            // Pass the context (collection name) to the view
+            ViewData["Context"] = context;
+
             return View();
         }
+
 
         // POST: Cards/Create
         [HttpPost]
@@ -109,14 +97,14 @@ namespace FlashCards.Controllers
                     // Add the cardCollectionLink to the table
                     _context.CardCollectionLinks.Add(cardCollectionLink);
                     await _context.SaveChangesAsync(); // Save changes to add the new link
-                }
 
-                return RedirectToAction(nameof(Index));
+                    // Redirect to the details page of the matching collection
+                    //return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Details", "Collections", new { id = collection.Id });
+                }
             }
             return View(card);
         }
-
-
 
 
         // GET: Cards/Edit/5
