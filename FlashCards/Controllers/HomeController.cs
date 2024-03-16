@@ -29,6 +29,26 @@ namespace FlashCards.Controllers
             return View(collections);
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var collection = await _context.Collections
+                .Include(c => c.CardCollectionLinks)
+                .ThenInclude(cc => cc.Card)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (collection == null)
+            {
+                return NotFound();
+            }
+
+            return View(collection);
+        }
+
         public IActionResult Privacy()
         {
             return View();

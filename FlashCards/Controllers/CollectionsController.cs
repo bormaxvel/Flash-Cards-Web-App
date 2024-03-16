@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using FlashCards.Data;
 using FlashCards.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FlashCards.Controllers
 {
+    [Authorize]
     public class CollectionsController : Controller
     {
         private readonly ApplicationDbContext _context;

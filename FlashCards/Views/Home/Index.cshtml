@@ -4,11 +4,16 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to the flashcards APP</h1>
+    <h1>Welcome to the Flashcards App</h1>
 
-    <h2>To start using app, please login</h2>
-
-    <h2>Here are the available collections of cards</h2>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="https://localhost:7280/Collections" class="btn btn-primary mt-4 mb-4">Go to Learning tab</a>
+    } else
+    {
+        <p>To begin using the app, please log in or sign up.</p>
+    }
+    <h3 class="mt-4">Here are the available collections of cards</h3>
 
     <table class="table">
         <thead>
@@ -39,10 +44,13 @@
                         @Html.DisplayFor(modelItem => item.CardCollectionLinks.Count)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-controller="Collections" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+
+
+    
 </div>

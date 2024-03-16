@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FlashCards.Data;
 using FlashCards.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FlashCards.Controllers
 {
+    [Authorize]
     public class cardCollectionLinksController : Controller
     {
         private readonly ApplicationDbContext _context;

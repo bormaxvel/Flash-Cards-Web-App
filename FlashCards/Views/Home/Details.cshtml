@@ -1,0 +1,64 @@
+﻿@model FlashCards.Models.Collection
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Collection</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Term
+                </th>
+                <th>
+                    Definition
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.CardCollectionLinks != null)
+            {
+                foreach (var cardLink in Model.CardCollectionLinks)
+                {
+                    if (cardLink.Card != null && cardLink.Card.Context == Model.Name)
+                    {
+                        <tr>
+                            <td>
+                                @cardLink.Card.Term
+                            </td>
+                            <td>
+                                @cardLink.Card.Definition
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
