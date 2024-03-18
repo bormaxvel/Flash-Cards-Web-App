@@ -52,12 +52,10 @@
                     <input type="checkbox" class="form-check-input" class="" id="checkbox_@item.Id" data-collection-id="@item.Id" @(hasAccess ? "checked" : "") />
                 </td>
                 <td class="p-0">
-                    <a asp-action="Edit" class="btn btn-secondary p-1 mt-1" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" class="btn btn-secondary p-1 mt-1" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" class="btn btn-secondary p-1 mt-1" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Details" class="btn btn-secondary p-1 mt-1" asp-route-id="@item.Id">Manage</a>
                 </td>
                 <td class="p-0">
-                    <a asp-action="ViewCards" class="btn btn-primary p-1 mt-1" asp-route-collectionId="@item.Id">Learn Cards</a> <!-- Додайте посилання на сторінку ViewCards -->
+                    <a asp-action="ViewCards" class="btn btn-primary p-1 mt-1" asp-route-collectionId="@item.Id">Learn this collection</a> <!-- Додайте посилання на сторінку ViewCards -->
                 </td>
             </tr>
 
