@@ -8,12 +8,12 @@
 
 @foreach (var card in Model)
 {
-    <div style="text-align: center;">
-        <div style="display: inline-block; text-align: left;">
-            <h2>@card.Term</h2>
-            <p>@card.Definition</p>
-            <button class="remembered" data-card-id="@card.Id" data-remembered="true">ЗГАДАВ</button>
-            <button class="not-remembered" data-card-id="@card.Id" data-remembered="false">НЕ ЗГАДАВ</button>
+    <div class="card align-items-center m-auto mb-3" style="width: fit-content">
+        <div class="card-body">
+            <h3 class="card-header mb-2">@card.Term</h3>
+            <p class="card-header mb-2">@card.Definition</p>
+            <button class="remembered btn btn-secondary" data-card-id="@card.Id" data-remembered="true">ЗГАДАВ</button>
+            <button class="not-remembered btn btn-secondary" data-card-id="@card.Id" data-remembered="false">НЕ ЗГАДАВ</button>
         </div>
     </div>
 
