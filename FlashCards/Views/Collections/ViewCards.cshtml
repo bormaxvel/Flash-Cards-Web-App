@@ -4,16 +4,19 @@
     ViewData["Title"] = "View Cards";
 }
 
-<h1>View Cards</h1>
+<h1 style ="text-align: center;">View Cards</h1>
 
 @foreach (var card in Model)
 {
-    <div>
-        <h2>@card.Term</h2>
-        <p>@card.Definition</p>
-        <button class="remembered" data-card-id="@card.Id" data-remembered="true">ЗГАДАВ</button>
-        <button class="not-remembered" data-card-id="@card.Id" data-remembered="false">НЕ ЗГАДАВ</button>
+    <div style="text-align: center;">
+        <div style="display: inline-block; text-align: left;">
+            <h2>@card.Term</h2>
+            <p>@card.Definition</p>
+            <button class="remembered" data-card-id="@card.Id" data-remembered="true">ЗГАДАВ</button>
+            <button class="not-remembered" data-card-id="@card.Id" data-remembered="false">НЕ ЗГАДАВ</button>
+        </div>
     </div>
+
 }
 
 @section Scripts {
