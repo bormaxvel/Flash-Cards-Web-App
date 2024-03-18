@@ -22,6 +22,7 @@
                 Selected
             </th>
             <th></th>
+            <th></th> <!-- Додайте новий стовпець для посилання на View Cards -->
         </tr>
     </thead>
     <tbody>
@@ -55,10 +56,22 @@
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
+                <td>
+                    <a asp-action="ViewCards" asp-route-collectionId="@item.Id">View Cards</a> <!-- Додайте посилання на сторінку ViewCards -->
+                </td>
             </tr>
+
         }
     </tbody>
+
 </table>
+<div class="modal fade" id="cardsModal" tabindex="-1" role="dialog" aria-labelledby="cardsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Контент буде завантажено через AJAX -->
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script>
@@ -84,4 +97,5 @@
             });
         });
     </script>
+
 }

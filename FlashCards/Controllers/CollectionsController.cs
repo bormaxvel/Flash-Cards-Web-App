@@ -23,6 +23,44 @@ namespace FlashCards.Controllers
             _context = context;
             _userManager = userManager;
         }
+        [HttpPost]
+        public async Task<IActionResult> ToggleMention(int cardId, bool remembered)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            var status = await _context.Statuses.FirstOrDefaultAsync(s => s.UserId == currentUser.Id && s.CardId == cardId);
+
+            if (status != null)
+            {
+                if (remembered)
+                {
+                    status.Mentions++;
+                }
+                else
+                {
+                    status.Mentions--;
+                }
+
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
+        public async Task<IActionResult> ViewCards(int collectionId)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            var cardsInCollection = await _context.CardCollectionLinks
+                .Where(ccl => ccl.CollectionID == collectionId)
+                .Select(ccl => ccl.Card)
+                .ToListAsync();
+
+            return View(cardsInCollection);
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> ToggleAccess(int collectionId, bool isChecked)
@@ -226,6 +264,11 @@ namespace FlashCards.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            Response.Cookies.Append("cookieName", "cookieValue", new CookieOptions
+            {
+                Secure = Request.IsHttps
+            });
+
             var collection = await _context.Collections.FindAsync(id);
             if (collection != null)
             {

@@ -1,0 +1,43 @@
+﻿@model List<FlashCards.Models.Card>
+
+@{
+    ViewData["Title"] = "View Cards";
+}
+
+<h1>View Cards</h1>
+
+@foreach (var card in Model)
+{
+    <div>
+        <h2>@card.Term</h2>
+        <p>@card.Definition</p>
+        <button class="remembered" data-card-id="@card.Id" data-remembered="true">ЗГАДАВ</button>
+        <button class="not-remembered" data-card-id="@card.Id" data-remembered="false">НЕ ЗГАДАВ</button>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.remembered, .not-remembered').click(function () {
+                var cardId = $(this).data('card-id');
+                var remembered = $(this).data('remembered');
+
+                $.ajax({
+                    url: '/Collections/ToggleMention',
+                    type: 'POST',
+                    data: {
+                        cardId: cardId,
+                        remembered: remembered
+                    },
+                    success: function (data) {
+                        console.log('Mention toggled successfully.');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error toggling mention: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+}
