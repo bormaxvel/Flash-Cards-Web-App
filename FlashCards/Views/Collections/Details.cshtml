@@ -1,12 +1,14 @@
-﻿@model FlashCards.Models.Collection
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@model FlashCards.Models.Collection
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = @Localizer["lblTitle"];
 }
 
-<h1>Collection</h1>
-
-
+<h1>@Localizer["lblTitle"]</h1>
 
 <div>
     <hr />
@@ -25,18 +27,18 @@
         </dd>
     </dl>
 </div>
-<a asp-action="Edit" class="btn btn-secondary p-1 mt-1" asp-route-id="@Model?.Id">Edit</a> |
-<a asp-action="Delete" class="btn btn-secondary p-1 mt-1" asp-route-id="@Model?.Id">Delete</a>
+<a asp-action="Edit" class="btn btn-secondary p-1 mt-1" asp-route-id="@Model?.Id">@Localizer["lblEdit"]</a> |
+<a asp-action="Delete" class="btn btn-secondary p-1 mt-1" asp-route-id="@Model?.Id">@Localizer["lblDelete"]</a>
 <div>
     <hr />
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Term
+                    @Localizer["lblword"]
                 </th>
                 <th>
-                    Definition
+                    @Localizer["lbldefinition"]
                 </th>
             </tr>
         </thead>
@@ -65,10 +67,10 @@
 <div>
     <form asp-controller="Cards" asp-action="Create" method="get">
         <input type="hidden" name="context" value="@Model.Name" />
-        <button type="submit" class="btn btn-primary">Add Word</button>
+        <button type="submit" class="btn btn-primary">@Localizer["lbladd"]</button>
     </form>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["lblback"]</a>
 </div>

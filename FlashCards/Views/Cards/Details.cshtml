@@ -1,13 +1,17 @@
-﻿@model FlashCards.Models.Card
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@model FlashCards.Models.Card
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Localizer["lblDetails"]</h1>
 
 <div>
-    <h4>Card</h4>
+    <h4>@Localizer["lblcard"]</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -31,6 +35,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">@Localizer["lbledit"]</a> |
+    <a asp-action="Index">@Localizer["lbback"]</a>
 </div>

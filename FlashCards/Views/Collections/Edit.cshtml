@@ -1,12 +1,14 @@
-﻿@model FlashCards.Models.Collection
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@model FlashCards.Models.Collection
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Collection</h4>
+<h1>@Localizer["lbledit"]</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,8 +26,8 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group mt-1">
-                <input type="submit" value="Save" class="btn btn-primary" /> | 
-                <a asp-action="Details" asp-route-id="@Model?.Id">Cancel</a>
+                <input type="submit" value="@Localizer["lbsave"]" class="btn btn-primary" /> |
+                <a asp-action="Details" asp-route-id="@Model?.Id">@Localizer["lbback"]</a>
             </div>
         </form>
     </div>

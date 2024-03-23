@@ -55,6 +55,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
+            @await Html.PartialAsync("_CurrentLanguage")
             &copy; 2024 - FlashCards - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
