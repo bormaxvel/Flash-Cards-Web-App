@@ -4,27 +4,40 @@
     ViewData["Title"] = "View Cards";
 }
 
-<h1 style ="text-align: center;">View Cards</h1>
+<h1 style="text-align: center;">View Cards</h1>
 
 @foreach (var card in Model)
 {
     <div class="card align-items-center m-auto mb-3" style="width: fit-content">
         <div class="card-body">
             <h3 class="card-header mb-2">@card.Term</h3>
-            <p class="card-header mb-2">@card.Definition</p>
+            <p class="card-header mb-2 definition" style="display: none;">@card.Definition</p>
+            <button class="show-definition btn btn-secondary">Show Definition</button>
+            <button class="add-definition-input btn btn-secondary">Add Definition Input</button>
+            <input type="text" class="form-control definition-input" placeholder="Enter definition" style="margin-top: 10px; display: none;">
+            <button class="check-definition btn btn-secondary">Check Definition</button>
+            <span class="definition-validation" style="display: none;"></span>
             <button class="remembered btn btn-secondary" data-card-id="@card.Id" data-remembered="true">ЗГАДАВ</button>
             <button class="not-remembered btn btn-secondary" data-card-id="@card.Id" data-remembered="false">НЕ ЗГАДАВ</button>
         </div>
     </div>
-
 }
 
 @section Scripts {
     <script>
         $(document).ready(function () {
+            $('.show-definition').click(function () {
+                $(this).prev('.definition').toggle();
+            });
+
+            $('.add-definition-input').click(function () {
+                $(this).siblings('.definition-input').toggle().focus();
+            });
+
             $('.remembered, .not-remembered').click(function () {
                 var cardId = $(this).data('card-id');
                 var remembered = $(this).data('remembered');
+                var cardContainer = $(this).closest('.card-body');
 
                 $.ajax({
                     url: '/Collections/ToggleMention',
@@ -40,6 +53,27 @@
                         console.error('Error toggling mention: ' + error);
                     }
                 });
+
+                // Disable remembered buttons in the current card
+                cardContainer.find('.remembered, .not-remembered').prop('disabled', true);
+            });
+
+            $('.check-definition').click(function () {
+                var definitionInput = $(this).siblings('.definition-input');
+                var enteredDefinition = definitionInput.val();
+                var correctDefinition = $(this).parent().find('.definition').text();
+                var validationMessage = $(this).siblings('.definition-validation');
+
+                if (definitionInput.is(':visible')) {
+                    if (enteredDefinition.toLowerCase() === correctDefinition.toLowerCase()) {
+                        validationMessage.text('Correct').css('color', 'green').show();
+                    } else {
+                        validationMessage.text('Incorrect').css('color', 'red').show();
+                    }
+                } else {
+                    // Display error message or handle it in any other appropriate way
+                    console.log('Enter definition field is not visible');
+                }
             });
         });
     </script>
