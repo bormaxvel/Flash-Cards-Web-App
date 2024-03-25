@@ -13,7 +13,7 @@ namespace FlashCards.Models
         // Назва колекції
         public string Name { get; set; }
 
-        [Display(Description = "CollectionDescription")]
+        [Display(Name = "CollectionDescription")]
         // Опис колекції
         public string Description { get; set; }
 
