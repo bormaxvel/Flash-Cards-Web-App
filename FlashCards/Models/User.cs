@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlashCards.Models
 {
@@ -8,6 +9,7 @@ namespace FlashCards.Models
         // Ідентифікатор користувача
 
         // Нікнейм користувача
+        [Display(Name = "uNickName")]
         public string? nickName { get; set; }
 
         public ICollection<userCollectionLink>? UserCollectionLinks { get; set; }

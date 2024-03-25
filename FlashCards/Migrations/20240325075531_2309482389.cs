@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FlashCards.Migrations
 {
     /// <inheritdoc />
-    public partial class _1 : Migration
+    public partial class _2309482389 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
