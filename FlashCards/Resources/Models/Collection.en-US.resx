@@ -126,4 +126,7 @@
   <data name="lblerrorName" xml:space="preserve">
     <value>Collection`s name is required</value>
   </data>
+  <data name="lblexistedcollection" xml:space="preserve">
+    <value>Collection with this name already exists</value>
+  </data>
 </root>

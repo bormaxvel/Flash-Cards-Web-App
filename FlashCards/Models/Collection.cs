@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlashCards.Models
 {
@@ -10,6 +11,7 @@ namespace FlashCards.Models
 
         [Display(Name="lblCollectionName")]
         [Required(ErrorMessage = "lblerrorName")]
+        [Remote("CheckNewCollectionName", "CollectionsValidation", ErrorMessage = "lblexistedcollection")]
         // Назва колекції
         public string Name { get; set; }
 
