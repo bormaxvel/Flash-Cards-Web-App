@@ -126,4 +126,10 @@
   <data name="lblCardName" xml:space="preserve">
     <value>Слово</value>
   </data>
+  <data name="lblerrorDefinition" xml:space="preserve">
+    <value>Обов'язково введіть значення слова</value>
+  </data>
+  <data name="lblerrorTerm" xml:space="preserve">
+    <value>Обов'язково введіть слово</value>
+  </data>
 </root>

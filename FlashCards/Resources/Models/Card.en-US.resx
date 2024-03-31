@@ -126,4 +126,10 @@
   <data name="lblCardName" xml:space="preserve">
     <value>Word</value>
   </data>
+  <data name="lblerrorDefinition" xml:space="preserve">
+    <value>Definition is required</value>
+  </data>
+  <data name="lblerrorTerm" xml:space="preserve">
+    <value>Word is required</value>
+  </data>
 </root>

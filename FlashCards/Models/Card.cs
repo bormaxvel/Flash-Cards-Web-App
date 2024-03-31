@@ -10,13 +10,16 @@ namespace FlashCards.Models
         // Оригінальне значення
 
         [Display(Name = "lblCardName")]
+        [Required (ErrorMessage = "lblerrorTerm")]
         public string Term { get; set; }
         // Визначення або переклад
 
         [Display(Name = "lblCardDefinition")]
+        [Required(ErrorMessage = "lblerrorDefinition")]
         public string Definition { get; set; }
 
         [Display(Name = "lblCardContext")]
+        [Required]
         // Контекст використання
         public string Context { get; set; }
 

@@ -123,4 +123,7 @@
   <data name="lblCollectionName" xml:space="preserve">
     <value>Колекція</value>
   </data>
+  <data name="lblerrorName" xml:space="preserve">
+    <value>Обов'язково введіть назву колекції</value>
+  </data>
 </root>

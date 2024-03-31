@@ -9,7 +9,7 @@ namespace FlashCards.Models
         public int Id { get; set; }
 
         [Display(Name="lblCollectionName")]
-
+        [Required(ErrorMessage = "lblerrorName")]
         // Назва колекції
         public string Name { get; set; }
 
