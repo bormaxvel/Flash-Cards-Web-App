@@ -20,11 +20,14 @@ namespace FlashCards.Controllers
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult CheckNickName(string nickName )
+        public IActionResult CheckNickName(string nickName, InputModel input )
         {
-            var result = _context.Users.Any(a=> string.Equals(a.nickName, nickName));
+           
+            var result =  _context.Users.Any(a => string.Equals(a.nickName, input.nickName) || string.Equals(a.nickName, nickName));
             return Json(!result);
         }
+
+
 
     }
 }
