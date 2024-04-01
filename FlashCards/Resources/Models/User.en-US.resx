@@ -120,6 +120,15 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="lblerrorEmail" xml:space="preserve">
+    <value>You must enter Email!</value>
+  </data>
+  <data name="lblerrorNick" xml:space="preserve">
+    <value>You must enter nickName!</value>
+  </data>
+  <data name="lblexist" xml:space="preserve">
+    <value>A user with the same name already exists</value>
+  </data>
   <data name="uNickName" xml:space="preserve">
     <value>Nickname</value>
   </data>

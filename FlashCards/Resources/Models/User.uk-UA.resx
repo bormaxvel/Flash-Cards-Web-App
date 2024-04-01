@@ -120,6 +120,15 @@
   <data name="Email" xml:space="preserve">
     <value>Електронна адреса</value>
   </data>
+  <data name="lblerrorEmail" xml:space="preserve">
+    <value>Ви повинні заповнити електронну адресу!</value>
+  </data>
+  <data name="lblerrorNick" xml:space="preserve">
+    <value>Ви повинні заповнити нікнейм!</value>
+  </data>
+  <data name="lblexist" xml:space="preserve">
+    <value>Користувач із таким ім'ям вже існує</value>
+  </data>
   <data name="uNickName" xml:space="preserve">
     <value>Ім'я</value>
   </data>
