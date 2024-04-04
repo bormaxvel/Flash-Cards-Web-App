@@ -63,7 +63,7 @@ namespace FlashCards.Controllers
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             ViewData["CollectionID"] = new SelectList(_context.Collections, "Id", "Name");
-            return View();
+            return PartialView("~/Views/userCollectionLinks/_AddNewLink.cshtml");
         }
 
         // POST: userCollectionLinks/Create
