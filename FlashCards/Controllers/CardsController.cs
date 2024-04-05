@@ -56,9 +56,9 @@ namespace FlashCards.Controllers
 
             // Pass the context (collection name) to the view
             ViewData["Context"] = context;
-            return View();
+            //return View();
 
-            //return PartialView("~/Views/Cards/_AddNewCard.cshtml");
+            return PartialView("~/Views/Cards/_AddNewCard.cshtml");
         }
 
 
@@ -106,6 +106,7 @@ namespace FlashCards.Controllers
                     return RedirectToAction("Details", "Collections", new { id = collection.Id });
                 }
             }
+            //return PartialView("~/Views/Cards/_AddNewCard.cshtml");
             return View(card);
         }
 

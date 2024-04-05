@@ -48,7 +48,8 @@ namespace FlashCards.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            return View();
+            // return View();
+            return PartialView("~/Views/Users/_AddNewUser.cshtml");
         }
 
         // POST: Users/Create
