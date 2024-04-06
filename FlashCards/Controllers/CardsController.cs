@@ -59,6 +59,7 @@ namespace FlashCards.Controllers
             //return View();
 
             return PartialView("~/Views/Cards/_AddNewCard.cshtml");
+            
         }
 
 
@@ -106,8 +107,8 @@ namespace FlashCards.Controllers
                     return RedirectToAction("Details", "Collections", new { id = collection.Id });
                 }
             }
-            //return PartialView("~/Views/Cards/_AddNewCard.cshtml");
-            return View(card);
+            return PartialView("~/Views/Cards/_AddNewCard.cshtml");
+            //return View(card);
         }
 
 

@@ -11,9 +11,9 @@
 <h1>@Localizer["lblcards"]</h1>
 
 <p>
-    <a asp-action="Create">@Localizer["lblCreate"]</a>
+    @* <a asp-action="Create">@Localizer["lblCreate"]</a> *@
 
-    <button type="button" class="btn btn-success" onclick="addEntity('Cards')">+</button>
+    <button type="button" class="btn btn-success" onclick="addEntity('Cards')">@Localizer["lblCreate"]</button>
 </p>
 <table class="table">
     <thead>

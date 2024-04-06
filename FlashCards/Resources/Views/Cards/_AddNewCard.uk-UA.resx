@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblback" xml:space="preserve">
-    <value>Back to list</value>
+    <value>Закрити</value>
   </data>
   <data name="lblbutton" xml:space="preserve">
-    <value>Create</value>
+    <value>Створити</value>
   </data>
   <data name="lblCreate" xml:space="preserve">
-    <value>Create card</value>
+    <value>Створити картку</value>
   </data>
 </root>

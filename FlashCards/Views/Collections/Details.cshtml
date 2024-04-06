@@ -67,7 +67,8 @@
 <div>
     <form asp-controller="Cards" asp-action="Create" method="get">
         <input type="hidden" name="context" value="@Model.Name" />
-        <button type="submit" class="btn btn-primary">@Localizer["lbladd"]</button>
+        @* <button type="submit" class="btn btn-primary">@Localizer["lbladd"]</button> *@
+        <button type="button" class="btn btn-success" onclick="addEntity('Cards')">@Localizer["lbladd"]</button>
     </form>
 </div>
 

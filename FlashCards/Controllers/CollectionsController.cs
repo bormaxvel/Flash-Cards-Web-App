@@ -171,7 +171,8 @@ namespace FlashCards.Controllers
         // GET: Collections/Create
         public IActionResult Create()
         {
-            return View();
+            //return View();
+            return PartialView("~/Views/Collections/_AddNewCollection.cshtml");
         }
 
         // POST: Collections/Create
@@ -187,7 +188,8 @@ namespace FlashCards.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(collection);
+            //return View(collection);
+            return PartialView("~/Views/Collections/_AddNewCollection.cshtml");
         }
 
         // GET: Collections/Edit/5
