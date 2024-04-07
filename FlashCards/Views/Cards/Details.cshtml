@@ -35,6 +35,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">@Localizer["lbledit"]</a> |
+    @* <a asp-action="Edit" asp-route-id="@Model?.Id">@Localizer["lbledit"]</a>  *@
+    
+    <button type="button" class="btn btn-success" onclick="addEntity('Cards')">@Localizer["lbledit"]</button> |
     <a asp-action="Index">@Localizer["lbback"]</a>
 </div>

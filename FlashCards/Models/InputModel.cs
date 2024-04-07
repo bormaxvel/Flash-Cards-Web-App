@@ -17,6 +17,7 @@ namespace FlashCards.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        [RegularExpression(@"^(?!.*@mail\.ru).*", ErrorMessage = "Emails from mail.ru domain are not allowed.")]
         public string Email { get; set; }
 
         /// <summary>

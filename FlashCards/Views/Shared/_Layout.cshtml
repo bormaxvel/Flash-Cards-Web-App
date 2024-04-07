@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,22 +26,22 @@
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["home"]</a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Collections" asp-action="">Main</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Collections" asp-action="">@Localizer["main"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cards" asp-action="">All cards</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cards" asp-action="">@Localizer["cards"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Status" asp-action="">*statuses*</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Status" asp-action="">@Localizer["status"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="userCollectionLinks" asp-action="">*user's collections*</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="userCollectionLinks" asp-action="">@Localizer["collections"]</a>
                             </li>
                         }
                     </ul>

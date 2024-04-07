@@ -20,10 +20,19 @@ namespace FlashCards.Controllers
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult CheckNewCollectionName(string Name )
+        public IActionResult CheckNewCollectionName(string Name, int id)
         {
-            var result = _context.Collections.Any(a=> string.Equals(a.Name, Name));
-            return Json(!result);
+
+            //var result = _context.Collections.Any(a => string.Equals(a.Name, Name));
+
+            //return Json(!result);
+
+            var existingCollection = _context.Collections.FirstOrDefault(c => c.Name == Name);
+
+            bool isNameAvailable = existingCollection == null || existingCollection.Id == id;
+
+            return Json(!isNameAvailable);
+
         }
 
     }

@@ -1,19 +1,23 @@
-﻿@model IEnumerable<FlashCards.Models.Collection>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@model IEnumerable<FlashCards.Models.Collection>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1>Welcome to the Flashcards App</h1>
+    <h1>@Localizer["welcome"]</h1>
 
     @if (User.Identity.IsAuthenticated)
     {
-        <a href="https://localhost:7280/Collections" class="btn btn-primary mt-4 mb-4">Go to Learning tab</a>
+        <a href="https://localhost:7280/Collections" class="btn btn-primary mt-4 mb-4">@Localizer["learning"]</a>
     } else
     {
-        <p>To begin using the app, please log in or sign up.</p>
+        <p>@Localizer["login"]</p>
     }
-    <h3 class="mt-4">Here are the available collections of cards</h3>
+    <h3 class="mt-4">@Localizer["collections"]</h3>
 
     <table class="table">
         <thead>
@@ -25,7 +29,7 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
-                    Number Of Words
+                    @Localizer["words"]
                 </th>
                 <th></th>
             </tr>
@@ -44,7 +48,7 @@
                         @Html.DisplayFor(modelItem => item.CardCollectionLinks.Count)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">@Localizer["details"]</a>
                     </td>
                 </tr>
             }

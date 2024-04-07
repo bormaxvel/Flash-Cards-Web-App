@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FlashCards.Data;
 using FlashCards.Models;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace FlashCards.Controllers
 {
@@ -26,8 +27,6 @@ namespace FlashCards.Controllers
             var result =  _context.Users.Any(a => string.Equals(a.nickName, input.nickName) || string.Equals(a.nickName, nickName));
             return Json(!result);
         }
-
-
 
     }
 }
