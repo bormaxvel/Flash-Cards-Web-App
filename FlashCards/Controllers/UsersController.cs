@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FlashCards.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RoleNames.ADMIN)]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -120,6 +120,7 @@ namespace FlashCards.Controllers
         }
 
         // GET: Users/Delete/5
+        [Authorize(Roles = RoleNames.ROOT_ADMIN)]
         public async Task<IActionResult> Delete(string? id)
         {
             if (id == null)

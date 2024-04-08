@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FlashCards.Controllers
 {
-    [Authorize]
+   
+   
     public class userCollectionLinksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,11 +30,23 @@ namespace FlashCards.Controllers
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
-            // Фильтруем записи по текущему идентификатору пользователя
-            var userCollectionLinks = _context.UserCollectionLinks
-                .Include(u => u.Collection)
-                .Include(u => u.User)
-                .Where(u => u.UserId == currentUser.Id);
+            var isAdmin = await _userManager.IsInRoleAsync(currentUser, RoleNames.ADMIN);
+
+            IQueryable<userCollectionLink> userCollectionLinks;
+
+            if (isAdmin)
+            {
+                userCollectionLinks = _context.UserCollectionLinks
+                    .Include(u => u.Collection)
+                    .Include(u => u.User);
+            }
+            else
+            {
+                userCollectionLinks = _context.UserCollectionLinks
+                    .Include(u => u.Collection)
+                    .Include(u => u.User)
+                    .Where(u => u.UserId == currentUser.Id);
+            }
 
             return View(await userCollectionLinks.ToListAsync());
         }
@@ -59,6 +72,7 @@ namespace FlashCards.Controllers
         }
 
         // GET: userCollectionLinks/Create
+        [Authorize(Roles = RoleNames.ADMIN)]
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
@@ -71,6 +85,7 @@ namespace FlashCards.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.ADMIN)]
         public async Task<IActionResult> Create([Bind("Id,UserId,CollectionID")] userCollectionLink userCollectionLink)
         {
             if (ModelState.IsValid)
@@ -140,6 +155,7 @@ namespace FlashCards.Controllers
         }
 
         // GET: userCollectionLinks/Delete/5
+        [Authorize(Roles = RoleNames.ADMIN)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -162,6 +178,7 @@ namespace FlashCards.Controllers
         // POST: userCollectionLinks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleNames.ADMIN)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var userCollectionLink = await _context.UserCollectionLinks.FindAsync(id);

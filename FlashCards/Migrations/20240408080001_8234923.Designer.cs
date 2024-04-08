@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlashCards.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240406140324_1")]
-    partial class _1
+    [Migration("20240408080001_8234923")]
+    partial class _8234923
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

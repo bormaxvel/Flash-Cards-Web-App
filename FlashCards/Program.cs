@@ -32,6 +32,25 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(RoleNames.ADMIN, policy =>
+    {
+        policy.RequireRole(RoleNames.ADMIN);
+    });
+
+    options.AddPolicy(RoleNames.USER, policy =>
+    {
+        policy.RequireRole(RoleNames.USER);
+    });
+
+    options.AddPolicy(RoleNames.ADMIN, policy =>
+    {
+        policy.RequireRole(RoleNames.ADMIN);
+    });
+
+
+});
 
 builder.Services.AddControllersWithViews();
 
