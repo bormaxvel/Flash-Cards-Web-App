@@ -1,0 +1,39 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@model IEnumerable<CultureInfo>
+
+@inject IViewLocalizer Localizer
+
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2>@Localizer["lblChangeLanguage"]</h2>               
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    @foreach (var culture in Model)
+                    {
+                        <div class="col-md-3">
+                            <form asp-action="SetLanguage" method="post"
+                                  asp-route-cultureName="@culture.Name"
+                                  asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                                <button class="btn btn-link" type="submit">@culture.DisplayName</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<partial name="_ValidationScriptsPartial" />

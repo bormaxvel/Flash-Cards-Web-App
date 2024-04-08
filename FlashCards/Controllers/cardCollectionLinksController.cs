@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FlashCards.Controllers
 {
-    [Authorize]
+    
     public class cardCollectionLinksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -47,13 +47,13 @@ namespace FlashCards.Controllers
 
             return View(cardCollectionLink);
         }
-
+        [Authorize(Roles = RoleNames.ADMIN)]
         // GET: cardCollectionLinks/Create
         public IActionResult Create()
         {
             ViewData["Id"] = new SelectList(_context.Cards, "Id", "Id");
             ViewData["Id"] = new SelectList(_context.Collections, "Id", "Id");
-            return View();
+            return PartialView("~/Views/cardCollectionLinks/_Create.cshtml");
         }
 
         // POST: cardCollectionLinks/Create

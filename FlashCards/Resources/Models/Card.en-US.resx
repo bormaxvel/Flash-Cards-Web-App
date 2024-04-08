@@ -132,4 +132,7 @@
   <data name="lblerrorTerm" xml:space="preserve">
     <value>Word is required</value>
   </data>
+  <data name="lblexistedWord" xml:space="preserve">
+    <value>Already existed</value>
+  </data>
 </root>

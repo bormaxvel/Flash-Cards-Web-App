@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace FlashCards.Models
@@ -11,6 +12,7 @@ namespace FlashCards.Models
 
         [Display(Name = "lblCardName")]
         [Required (ErrorMessage = "lblerrorTerm")]
+        [Remote("CheckNewWord", "CardsValidation", ErrorMessage = "lblexistedWord",AdditionalFields = "Id")]  
         public string Term { get; set; }
         // Визначення або переклад
 

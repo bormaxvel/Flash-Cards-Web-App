@@ -117,22 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblCardContext" xml:space="preserve">
-    <value>Колекція</value>
+  <data name="lblerrorCardId" xml:space="preserve">
+    <value>The "CardId" field is required.</value>
   </data>
-  <data name="lblCardDefinition" xml:space="preserve">
-    <value>Значення слова</value>
+  <data name="lblerrorCollectionID" xml:space="preserve">
+    <value>The "CollectionID" field is required.</value>
   </data>
-  <data name="lblCardName" xml:space="preserve">
-    <value>Слово</value>
+  <data name="lblexistedCardId" xml:space="preserve">
+    <value>Value is not unique!</value>
   </data>
-  <data name="lblerrorDefinition" xml:space="preserve">
-    <value>Обов'язково введіть значення слова</value>
-  </data>
-  <data name="lblerrorTerm" xml:space="preserve">
-    <value>Обов'язково введіть слово</value>
-  </data>
-  <data name="lblexistedWord" xml:space="preserve">
-    <value>Слово вже існує</value>
+  <data name="lblexistedCollectionId" xml:space="preserve">
+    <value>Value is not unique!</value>
   </data>
 </root>
