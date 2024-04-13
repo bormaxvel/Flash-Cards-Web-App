@@ -65,6 +65,7 @@ namespace FlashCards.Controllers
 
         // POST: Cards/Create
         [HttpPost]
+        [Authorize(Roles = RoleNames.USER)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Term,Definition,Context")] Card card)
         {
@@ -132,6 +133,7 @@ namespace FlashCards.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = RoleNames.USER)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Term,Definition,Context")] Card card)
         {
@@ -164,6 +166,7 @@ namespace FlashCards.Controllers
         }
 
         // GET: Cards/Delete/5
+        [Authorize(Roles = RoleNames.USER)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

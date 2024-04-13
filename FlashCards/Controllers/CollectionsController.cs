@@ -263,6 +263,7 @@ namespace FlashCards.Controllers
 
         // POST: Collections/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = RoleNames.ADMIN)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

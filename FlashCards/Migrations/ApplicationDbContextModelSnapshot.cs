@@ -176,10 +176,10 @@ namespace FlashCards.Migrations
 
             modelBuilder.Entity("FlashCards.Models.cardCollectionLink", b =>
                 {
-                    b.Property<int>("CardId")
+                    b.Property<int?>("CardId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CollectionID")
+                    b.Property<int?>("CollectionID")
                         .HasColumnType("int");
 
                     b.Property<int>("Id")

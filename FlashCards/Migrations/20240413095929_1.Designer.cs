@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlashCards.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240408080001_8234923")]
-    partial class _8234923
+    [Migration("20240413095929_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,10 +179,10 @@ namespace FlashCards.Migrations
 
             modelBuilder.Entity("FlashCards.Models.cardCollectionLink", b =>
                 {
-                    b.Property<int>("CardId")
+                    b.Property<int?>("CardId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CollectionID")
+                    b.Property<int?>("CollectionID")
                         .HasColumnType("int");
 
                     b.Property<int>("Id")
